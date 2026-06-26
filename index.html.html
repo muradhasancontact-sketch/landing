@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meet Real Singles Tonight — 18+ Adult Dating</title>
+<meta name="description" content="Thousands of verified adults are online now. Sign up free and start chatting instantly.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black:    #0a0a0a;
+    --deep:     #111014;
+    --card:     #17141c;
+    --border:   #2a2330;
+    --red:      #c0273e;
+    --red-glow: #e0304f;
+    --gold:     #c9963a;
+    --gold-lt:  #e8b84b;
+    --text:     #e8e0f0;
+    --muted:    #8a7e9a;
+    --white:    #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--black);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  a { text-decoration: none; color: inherit; }
+
+  /* ── PARTICLE CANVAS ── */
+  #particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: .35; }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 5%;
+    background: linear-gradient(180deg, rgba(10,10,10,.95) 0%, transparent 100%);
+    backdrop-filter: blur(6px);
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 900;
+    background: linear-gradient(90deg, var(--gold), var(--red-glow));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    letter-spacing: 1px;
+  }
+  .nav-badge {
+    background: var(--red); color: #fff;
+    font-size: .65rem; font-weight: 700; letter-spacing: 1.5px;
+    padding: 4px 10px; border-radius: 20px;
+    text-transform: uppercase;
+  }
+  .nav-cta {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--red), #8b0020);
+    color: #fff; font-weight: 600; font-size: .85rem;
+    padding: 9px 20px; border-radius: 24px;
+    border: 1px solid rgba(192,39,62,.5);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(192,39,62,.5); }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative; z-index: 1;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 120px 5% 80px;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(192,39,62,.12) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 80% 20%, rgba(201,150,58,.06) 0%, transparent 60%),
+                var(--black);
+  }
+
+  .age-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(201,150,58,.12);
+    border: 1px solid rgba(201,150,58,.35);
+    color: var(--gold-lt);
+    font-size: .72rem; font-weight: 700; letter-spacing: 2px;
+    padding: 6px 16px; border-radius: 20px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    animation: fadeDown .6s ease both;
+  }
+  .age-badge span { font-size: 1rem; }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 7vw, 5.2rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    animation: fadeDown .7s .1s ease both;
+  }
+  .hero h1 em {
+    font-style: normal;
+    background: linear-gradient(90deg, var(--red-glow), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+
+  .hero-sub {
+    font-size: clamp(.95rem, 2.2vw, 1.2rem);
+    color: var(--muted); max-width: 540px; margin: 0 auto 36px;
+    animation: fadeDown .7s .2s ease both;
+  }
+
+  .cta-primary {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--red-glow) 0%, #8b0020 100%);
+    color: #fff; font-size: 1.1rem; font-weight: 700;
+    padding: 18px 48px; border-radius: 50px;
+    letter-spacing: .5px;
+    box-shadow: 0 0 30px rgba(224,48,79,.5), 0 0 60px rgba(224,48,79,.2);
+    border: 1px solid rgba(255,255,255,.1);
+    transition: transform .2s, box-shadow .2s;
+    animation: fadeDown .7s .3s ease both, pulse-glow 2.5s 1s ease-in-out infinite;
+    position: relative; overflow: hidden;
+  }
+  .cta-primary::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,.15), transparent);
+    opacity: 0; transition: opacity .2s;
+  }
+  .cta-primary:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 0 50px rgba(224,48,79,.7), 0 0 80px rgba(224,48,79,.3); }
+  .cta-primary:hover::after { opacity: 1; }
+
+  .cta-note {
+    font-size: .78rem; color: var(--muted); margin-top: 12px;
+    animation: fadeDown .7s .4s ease both;
+  }
+  .cta-note strong { color: var(--gold-lt); }
+
+  /* online counter */
+  .online-bar {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,.04); border: 1px solid var(--border);
+    border-radius: 40px; padding: 10px 20px;
+    font-size: .85rem; margin-top: 32px;
+    animation: fadeDown .7s .5s ease both;
+  }
+  .pulse-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: #2ecc71;
+    box-shadow: 0 0 8px #2ecc71;
+    animation: blink 1.4s ease-in-out infinite;
+  }
+  #online-count { color: var(--gold-lt); font-weight: 700; font-size: 1rem; }
+
+  /* ── ACTIVITY FEED ── */
+  #activity-feed {
+    position: fixed; bottom: 80px; left: 20px; z-index: 50;
+    display: flex; flex-direction: column; gap: 8px;
+    pointer-events: none;
+  }
+  .activity-card {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(23,20,28,.92);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--red);
+    border-radius: 10px; padding: 10px 14px;
+    font-size: .78rem; max-width: 280px;
+    backdrop-filter: blur(8px);
+    animation: slideIn .4s ease both;
+    box-shadow: 0 4px 20px rgba(0,0,0,.5);
+  }
+  .activity-card.leaving { animation: slideOut .4s ease forwards; }
+  .activity-avatar {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--red), var(--gold));
+    display: flex; align-items: center; justify-content: center;
+    font-size: .8rem; font-weight: 700; color: #fff; flex-shrink: 0;
+  }
+  .activity-text strong { color: var(--gold-lt); }
+  .activity-text span { color: var(--muted); font-size: .72rem; display: block; margin-top: 1px; }
+
+  /* ── COUNTDOWN ── */
+  .urgency-bar {
+    position: relative; z-index: 1;
+    background: linear-gradient(90deg, rgba(192,39,62,.15), rgba(201,150,58,.08));
+    border-top: 1px solid rgba(192,39,62,.3);
+    border-bottom: 1px solid rgba(192,39,62,.3);
+    padding: 14px 5%; text-align: center;
+    font-size: .88rem;
+  }
+  .urgency-bar strong { color: var(--gold-lt); }
+  #countdown { display: inline-flex; gap: 16px; margin-left: 10px; }
+  .cd-unit { display: inline-flex; flex-direction: column; align-items: center; }
+  .cd-num { font-size: 1.3rem; font-weight: 700; color: var(--red-glow); line-height: 1; }
+  .cd-label { font-size: .6rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+  /* ── TRUST BADGES ── */
+  .trust-row {
+    position: relative; z-index: 1;
+    display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+    padding: 40px 5%;
+  }
+  .trust-badge {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 14px 22px;
+    font-size: .82rem; font-weight: 500;
+    transition: border-color .2s, transform .2s;
+  }
+  .trust-badge:hover { border-color: var(--gold); transform: translateY(-2px); }
+  .trust-icon { font-size: 1.3rem; }
+
+  /* ── SECTIONS ── */
+  section { position: relative; z-index: 1; padding: 80px 5%; }
+  .section-label {
+    font-size: .72rem; font-weight: 700; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--red-glow);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 900; line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .section-sub { color: var(--muted); max-width: 540px; margin-bottom: 48px; }
+
+  /* ── FEATURES ── */
+  .features { background: var(--deep); }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px; max-width: 1100px; margin: 0 auto;
+  }
+  .feature-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 28px 24px;
+    transition: border-color .2s, transform .2s;
+  }
+  .feature-card:hover { border-color: rgba(192,39,62,.5); transform: translateY(-4px); }
+  .feature-icon { font-size: 2rem; margin-bottom: 14px; display: block; }
+  .feature-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; color: var(--white); }
+  .feature-card p { font-size: .85rem; color: var(--muted); }
+
+  /* ── HOW IT WORKS ── */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px; max-width: 900px; margin: 0 auto;
+  }
+  .step {
+    text-align: center; padding: 24px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px;
+    transition: border-color .2s;
+  }
+  .step:hover { border-color: var(--gold); }
+  .step-num {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--red), var(--gold));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-weight: 900;
+    margin: 0 auto 16px; color: #fff;
+  }
+  .step h3 { font-size: .98rem; font-weight: 700; margin-bottom: 6px; }
+  .step p { font-size: .82rem; color: var(--muted); }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials { background: var(--deep); }
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px; max-width: 1100px; margin: 0 auto;
+  }
+  .testi-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 28px 24px;
+    transition: border-color .2s;
+  }
+  .testi-card:hover { border-color: rgba(201,150,58,.4); }
+  .testi-stars { color: var(--gold); font-size: 1rem; margin-bottom: 14px; letter-spacing: 2px; }
+  .testi-text { font-size: .88rem; color: #c9bdd8; line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .testi-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--red) 0%, var(--gold) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 1rem; color: #fff;
+    border: 2px solid rgba(201,150,58,.3);
+  }
+  .testi-name { font-weight: 600; font-size: .9rem; }
+  .testi-loc { font-size: .75rem; color: var(--muted); }
+
+  /* ── FAQ ── */
+  .faq-list { max-width: 740px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+  .faq-item {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden;
+  }
+  .faq-q {
+    width: 100%; background: none; border: none; color: var(--text);
+    font-family: inherit; font-size: .95rem; font-weight: 600;
+    text-align: left; padding: 18px 20px;
+    display: flex; justify-content: space-between; align-items: center;
+    cursor: pointer; transition: color .2s;
+  }
+  .faq-q:hover { color: var(--gold-lt); }
+  .faq-arrow { font-size: 1.1rem; transition: transform .3s; flex-shrink: 0; }
+  .faq-item.open .faq-arrow { transform: rotate(45deg); }
+  .faq-a {
+    max-height: 0; overflow: hidden;
+    font-size: .86rem; color: var(--muted); line-height: 1.7;
+    padding: 0 20px;
+    transition: max-height .35s ease, padding .35s ease;
+  }
+  .faq-item.open .faq-a { max-height: 200px; padding: 0 20px 18px; }
+
+  /* ── FINAL CTA ── */
+  .final-cta {
+    text-align: center;
+    background: radial-gradient(ellipse 70% 50% at 50% 50%, rgba(192,39,62,.15) 0%, transparent 70%);
+    padding: 100px 5%;
+  }
+  .final-cta .section-title { margin-bottom: 12px; }
+  .final-cta p { color: var(--muted); margin-bottom: 36px; }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative; z-index: 1;
+    background: var(--deep);
+    border-top: 1px solid var(--border);
+    padding: 32px 5%; text-align: center;
+    font-size: .78rem; color: var(--muted);
+    line-height: 1.9;
+  }
+  footer strong { color: var(--red-glow); }
+  .footer-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 10px; }
+  .footer-links a { color: var(--muted); transition: color .2s; }
+  .footer-links a:hover { color: var(--gold-lt); }
+
+  /* ── STICKY MOBILE CTA ── */
+  .sticky-cta {
+    display: none;
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+    padding: 12px 16px;
+    background: linear-gradient(180deg, transparent 0%, rgba(10,10,10,.95) 30%);
+  }
+  .sticky-cta a {
+    display: block;
+    background: linear-gradient(135deg, var(--red-glow), #8b0020);
+    color: #fff; font-weight: 700; font-size: 1rem;
+    text-align: center; padding: 15px;
+    border-radius: 14px;
+    box-shadow: 0 0 24px rgba(224,48,79,.5);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: .3; }
+  }
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 30px rgba(224,48,79,.5), 0 0 60px rgba(224,48,79,.2); }
+    50%       { box-shadow: 0 0 50px rgba(224,48,79,.75), 0 0 90px rgba(224,48,79,.35); }
+  }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-30px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes slideOut {
+    from { opacity: 1; transform: translateX(0); }
+    to   { opacity: 0; transform: translateX(-30px); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .sticky-cta { display: block; }
+    nav .nav-cta { display: none; }
+    #activity-feed { left: 10px; bottom: 90px; }
+    .activity-card { max-width: 240px; font-size: .72rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">FlirtConnect</div>
+  <span class="nav-badge">18+ Only</span>
+  <a href="https://go.affairmeet.my//tr?offer_id=769&aff_id=505" class="nav-cta">Join Free →</a>
+</nav>
+
+<!-- ACTIVITY FEED -->
+<div id="activity-feed"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="age-badge"><span>🔞</span> Adults Only · 18+ Verified Community</div>
+  <h1>Meet Real Singles<br><em>Tonight</em></h1>
+  <p class="hero-sub">Thousands of verified adults are online now. Sign up free and start chatting instantly.</p>
+  <a href="https://go.affairmeet.my//tr?offer_id=769&aff_id=505" class="cta-primary">💬 Start Chatting Now</a>
+  <p class="cta-note">✅ Free to join &nbsp;·&nbsp; <strong>No credit card required</strong> &nbsp;·&nbsp; Instant access</p>
+  <div class="online-bar">
+    <span class="pulse-dot"></span>
+    <span><span id="online-count">3,847</span> members online right now</span>
+  </div>
+</section>
+
+<!-- COUNTDOWN -->
+<div class="urgency-bar">
+  🔥 <strong>Special Offer Ends In:</strong>
+  <span id="countdown">
+    <span class="cd-unit"><span class="cd-num" id="cd-h">00</span><span class="cd-label">hrs</span></span>
+    <span class="cd-unit"><span class="cd-num" id="cd-m">00</span><span class="cd-label">min</span></span>
+    <span class="cd-unit"><span class="cd-num" id="cd-s">00</span><span class="cd-label">sec</span></span>
+  </span>
+  &nbsp;— Get <strong>Premium Chat Free</strong> when you join today
+</div>
+
+<!-- TRUST BADGES -->
+<div class="trust-row">
+  <div class="trust-badge"><span class="trust-icon">🔒</span> SSL Encrypted</div>
+  <div class="trust-badge"><span class="trust-icon">🛡️</span> 100% Private</div>
+  <div class="trust-badge"><span class="trust-icon">✅</span> Verified Profiles</div>
+  <div class="trust-badge"><span class="trust-icon">🌐</span> 190+ Countries</div>
+  <div class="trust-badge"><span class="trust-icon">⚡</span> Instant Matching</div>
+</div>
+
+<!-- FEATURES -->
+<section class="features">
+  <div style="max-width:1100px;margin:0 auto">
+    <p class="section-label">Why FlirtConnect</p>
+    <h2 class="section-title">Everything you need to<br><em style="font-style:normal;color:var(--gold-lt)">connect & flirt</em></h2>
+    <p class="section-sub">A secure, discreet platform built for adults who know what they want.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <span class="feature-icon">⚡</span>
+        <h3>Instant Matching</h3>
+        <p>Our smart algorithm surfaces compatible singles in your area within seconds of signing up.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">💬</span>
+        <h3>Private Messaging</h3>
+        <p>End-to-end encrypted chats that disappear on your schedule. Your conversations stay yours.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">📸</span>
+        <h3>Verified Profiles</h3>
+        <p>Every member passes a real-person verification check. No bots, no fake accounts.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🎯</span>
+        <h3>Advanced Filters</h3>
+        <p>Filter by age, location, interests, and availability to find exactly who you're looking for.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🌙</span>
+        <h3>Active 24/7</h3>
+        <p>Peak hours or 3 AM — there are always thousands of members awake and ready to chat.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🚫</span>
+        <h3>Zero Spam Policy</h3>
+        <p>AI-powered moderation keeps unwanted messages and explicit spam off the platform.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section style="background:var(--black)">
+  <div style="max-width:900px;margin:0 auto;text-align:center">
+    <p class="section-label">Getting Started</p>
+    <h2 class="section-title">Up and chatting in <em style="font-style:normal;color:var(--red-glow)">3 steps</em></h2>
+    <p class="section-sub" style="margin:0 auto 48px">No long forms, no credit card, no waiting. Just swipe, match, and flirt.</p>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Create Your Profile</h3>
+        <p>Takes under 60 seconds. Add a photo and a short bio to stand out.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Browse Matches</h3>
+        <p>Instant suggestions based on your preferences and location.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Start Chatting</h3>
+        <p>Send a message, exchange photos, and arrange to meet — on your terms.</p>
+      </div>
+    </div>
+    <a href="https://go.affairmeet.my//tr?offer_id=769&aff_id=505" class="cta-primary" style="margin-top:48px;display:inline-block">Create My Free Profile →</a>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div style="max-width:1100px;margin:0 auto">
+    <p class="section-label">Member Stories</p>
+    <h2 class="section-title">Real people, <em style="font-style:normal;color:var(--gold-lt)">real results</em></h2>
+    <p class="section-sub">Thousands of members have found meaningful connections on FlirtConnect.</p>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"I was skeptical at first, but the quality of people on here is genuinely impressive. Met someone amazing within my first week and we've been talking every day since."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">JR</div>
+          <div>
+            <div class="testi-name">Jessica R.</div>
+            <div class="testi-loc">Austin, TX · Member since 2023</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Finally a dating site that respects privacy. The verified profiles mean you know you're talking to real adults. Refreshing compared to the other apps."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#8b0020,var(--gold))">DM</div>
+          <div>
+            <div class="testi-name">David M.</div>
+            <div class="testi-loc">Chicago, IL · Member since 2022</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"The matching algorithm actually works. Everyone I've connected with has been on the same page about what they're looking for. Joined on a Friday, had plans by Sunday."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,var(--gold),#8b0020)">AL</div>
+          <div>
+            <div class="testi-name">Amanda L.</div>
+            <div class="testi-loc">Miami, FL · Member since 2024</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section style="background:var(--black)">
+  <div style="max-width:740px;margin:0 auto">
+    <p class="section-label">Questions</p>
+    <h2 class="section-title" style="margin-bottom:40px">Frequently asked</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">Is FlirtConnect really free to join? <span class="faq-arrow">+</span></button>
+        <div class="faq-a">Yes — creating a profile, browsing members, and sending your first messages is completely free. Optional premium features are available for members who want enhanced visibility and unlimited messaging.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How do you verify member ages? <span class="faq-arrow">+</span></button>
+        <div class="faq-a">All new members complete an age verification step during sign-up. We use third-party identity verification to confirm that every user is 18 or older before granting full access.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Is my personal information kept private? <span class="faq-arrow">+</span></button>
+        <div class="faq-a">Absolutely. Your data is stored on SSL-secured servers, never sold to third parties, and your real name is never displayed publicly unless you choose to add it. You control what other members see.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can I delete my account at any time? <span class="faq-arrow">+</span></button>
+        <div class="faq-a">Yes. You can permanently delete your account and all associated data from your profile settings at any time, with no questions asked and no waiting period.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Is there a mobile app? <span class="faq-arrow">+</span></button>
+        <div class="faq-a">Our platform is fully optimized for mobile browsers, so it works beautifully on any smartphone without needing an app download. A dedicated app is currently in development.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <p class="section-label">Don't Wait</p>
+  <h2 class="section-title">Someone is looking for<br><em style="font-style:normal;color:var(--red-glow)">exactly you</em></h2>
+  <p>Join thousands of verified singles who found their match tonight.</p>
+  <a href="https://go.affairmeet.my//tr?offer_id=769&aff_id=505" class="cta-primary">💬 Start Chatting Now — It's Free</a>
+  <p class="cta-note" style="margin-top:16px">🔞 <strong>18+ Adults Only</strong> &nbsp;·&nbsp; SSL Secured &nbsp;·&nbsp; No spam</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>🔞 This website is intended for adults aged 18 and over only.</strong><br>
+  By entering this site you confirm you are at least 18 years of age and agree to our Terms of Service and Privacy Policy.<br>
+  All member profiles are verified for age compliance. This site does not promote or condone illegal activity.<br>
+  <div class="footer-links">
+    <a href="#">Terms of Service</a>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Cookie Policy</a>
+    <a href="#">Contact</a>
+    <a href="#">18 U.S.C. 2257</a>
+  </div>
+  <p style="margin-top:16px">© 2025 FlirtConnect. All rights reserved.</p>
+</footer>
+
+<!-- STICKY MOBILE CTA -->
+<div class="sticky-cta">
+  <a href="https://go.affairmeet.my//tr?offer_id=769&aff_id=505">💬 Start Chatting Now — Free</a>
+</div>
+
+<script>
+// ── PARTICLES ──────────────────────────────────
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let W, H, dots = [];
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+resize(); window.addEventListener('resize', resize);
+for (let i = 0; i < 60; i++) {
+  dots.push({
+    x: Math.random() * 1920, y: Math.random() * 1080,
+    r: Math.random() * 1.5 + .3,
+    dx: (Math.random() - .5) * .25, dy: (Math.random() - .5) * .25,
+    hue: Math.random() > .5 ? '#c9963a' : '#c0273e',
+    o: Math.random() * .5 + .15
+  });
+}
+function animDots() {
+  ctx.clearRect(0, 0, W, H);
+  dots.forEach(d => {
+    d.x += d.dx; d.y += d.dy;
+    if (d.x < 0) d.x = W; if (d.x > W) d.x = 0;
+    if (d.y < 0) d.y = H; if (d.y > H) d.y = 0;
+    ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+    ctx.fillStyle = d.hue + Math.round(d.o * 255).toString(16).padStart(2,'0');
+    ctx.fill();
+  });
+  requestAnimationFrame(animDots);
+}
+animDots();
+
+// ── ONLINE COUNTER ─────────────────────────────
+let base = 3847;
+const el = document.getElementById('online-count');
+setInterval(() => {
+  base += Math.floor(Math.random() * 7) - 3;
+  base = Math.max(3600, Math.min(4200, base));
+  el.textContent = base.toLocaleString();
+}, 4200);
+
+// ── COUNTDOWN ──────────────────────────────────
+let target = Date.now() + (2 * 3600 + 37 * 60 + 14) * 1000;
+function updateCD() {
+  let rem = Math.max(0, Math.floor((target - Date.now()) / 1000));
+  const h = Math.floor(rem / 3600); rem %= 3600;
+  const m = Math.floor(rem / 60); const s = rem % 60;
+  document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+  document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+  if (rem === 0) { target = Date.now() + (2 * 3600 + 37 * 60 + 14) * 1000; }
+}
+updateCD(); setInterval(updateCD, 1000);
+
+// ── ACTIVITY FEED ──────────────────────────────
+const activities = [
+  { name: 'Sarah', loc: 'New York', action: 'just joined', icon: 'S' },
+  { name: 'Michael', loc: 'Los Angeles', action: 'started chatting', icon: 'M' },
+  { name: 'Emma', loc: 'Chicago', action: 'liked 3 profiles', icon: 'E' },
+  { name: 'Carlos', loc: 'Miami', action: 'sent a message', icon: 'C' },
+  { name: 'Jasmine', loc: 'Houston', action: 'just joined', icon: 'J' },
+  { name: 'Tyler', loc: 'Phoenix', action: 'started chatting', icon: 'T' },
+  { name: 'Olivia', loc: 'Seattle', action: 'updated her profile', icon: 'O' },
+  { name: 'Malik', loc: 'Atlanta', action: 'is browsing now', icon: 'M' },
+  { name: 'Priya', loc: 'San Jose', action: 'just joined', icon: 'P' },
+  { name: 'Zoe', loc: 'Denver', action: 'sent a message', icon: 'Z' },
+];
+const times = ['just now', '5 seconds ago', '12 seconds ago', '20 seconds ago', '30 seconds ago'];
+const feed = document.getElementById('activity-feed');
+
+function addActivity() {
+  const a = activities[Math.floor(Math.random() * activities.length)];
+  const t = times[Math.floor(Math.random() * times.length)];
+  const card = document.createElement('div');
+  card.className = 'activity-card';
+  card.innerHTML = `
+    <div class="activity-avatar">${a.icon}</div>
+    <div class="activity-text">
+      <strong>${a.name} from ${a.loc}</strong>
+      <span>${a.action} · ${t}</span>
+    </div>`;
+  feed.prepend(card);
+  if (feed.children.length > 3) {
+    const old = feed.lastChild;
+    old.classList.add('leaving');
+    setTimeout(() => old.remove(), 400);
+  }
+}
+addActivity();
+setInterval(addActivity, 4500);
+
+// ── FAQ ────────────────────────────────────────
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+// ── SCROLL REVEAL ──────────────────────────────
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.transition = 'opacity .6s ease, transform .6s ease';
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: .12 });
+document.querySelectorAll('.feature-card, .step, .testi-card, .trust-badge, .faq-item').forEach(el => {
+  el.style.opacity = '0'; el.style.transform = 'translateY(24px)';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
